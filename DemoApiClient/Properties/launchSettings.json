@@ -1,0 +1,12 @@
+{
+   "profiles": {
+      "DemoApiClient": {
+         "commandName": "Project",
+         "externalUrlConfiguration": true,
+         "environmentVariables": {
+            "ASPNETCORE_ENVIRONMENT": "Development"
+         },
+         "applicationUrl": "https://ATSUSNB191-ats-global.local:25000"
+      }
+   }
+}
