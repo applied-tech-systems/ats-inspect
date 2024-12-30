@@ -1,0 +1,11 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/DemoApiClient/bin/x64/Debug/net9.0/win-x64
+/.vs/ats-inspect-demo/v17
+/DemoApiClient/obj
+/DemoApiClient/.vs/DemoApiClient
+/DemoWebhookClient/.vs
+/DemoWebhookClient/obj/x64/Debug/net9.0/win-x64
+/DemoWebhookClient/obj
