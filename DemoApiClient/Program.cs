@@ -7,8 +7,8 @@ using System.Text.Json.Serialization;
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 var stationCode = "MPI1"; // <-- REPLACE WITH YOUR STATION CODE
-var identifierTypeCode = "IDENTITY-1"; // THIS SHOULD BE THE 'IDENTIFIER TYPE' FOR BODY NUMBER
-var identifier = "4102"; // THIS SHOULD BE YOUR IDENTIFIER ('BODY NUMBER' IN SMYRNA ENVIRONMENT)
+var identifierTypeCode = "IDENTITY-1"; // THIS SHOULD BE THE 'IDENTIFIER TYPE'
+var identifier = "4102"; // THIS SHOULD BE YOUR IDENTIFIER
 
 //
 // Setup HTTP client
@@ -57,8 +57,6 @@ try
 
    var stationContent = await stationResponse.Content.ReadFromJsonAsync<CollectorResponse>();
 
-   var collector = stationContent!;
-
    //
    // Get unit id for identifier
    //
@@ -76,24 +74,6 @@ try
    var unitContent = await unitResponse.Content.ReadFromJsonAsync<UnitIdResponse>();
 
    var unitId = unitContent!.UnitId;
-
-   ////
-   //// Insert tracking
-   ////
-
-   //var trackingPointId = Convert.ToInt32(collector.Properties.TrackingPointId.Value);
-
-   //url = $"/api/v1/collector/tracking/{trackingPointId}/{unitId}";
-
-   //using var trackingResponse = await client.PostAsync(url, null);
-
-   //if (! trackingResponse.IsSuccessStatusCode)
-   //{
-   //   // TODO: Handle error here...
-   //   return;
-   //}
-
-   //var trackingContent = await trackingResponse.Content.ReadFromJsonAsync<IdResponse>();
 
    //
    // Get defect statistics (so we can check for open defects)
