@@ -2,7 +2,6 @@
    <PropertyGroup Label="Globals">
       <Configurations>Debug;Release</Configurations>
    </PropertyGroup>
-  
    <PropertyGroup>
       <RootNamespace>ATS.Inspect.Demo</RootNamespace>
       <OutputType>Library</OutputType>
