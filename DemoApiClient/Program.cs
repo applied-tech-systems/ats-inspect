@@ -6,9 +6,25 @@ using System.Text.Json.Serialization;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
-var stationCode = "MPI1"; // <-- REPLACE WITH YOUR STATION CODE
-var identifierTypeCode = "IDENTITY-1"; // THIS SHOULD BE THE 'IDENTIFIER TYPE'
-var identifier = "4102"; // THIS SHOULD BE YOUR IDENTIFIER
+//
+// Data Service endpoint
+//
+
+const string dataServiceEndpoint = "https://atsusnb191.ats-global.local:8500";   // Adjust this value to match your local environment
+
+//
+// Security info
+//
+
+const string personalAccessToken = "M2ZlOGY0MTAtMDYwYS00MGZiLTdiODItMDhkY2E1YWY1YmQy"; // You need to have a user set up in Security Manager, assign rights, and create a personal access token (PAT)
+
+//
+// API arguments
+//
+
+var stationCode = "MPI1"; // <-- REPLACE WITH YOUR STATION CODE (stored in the 'stations' table')
+var identifierTypeCode = "ROTATION"; // THIS SHOULD BE THE 'IDENTIFIER TYPE' (stored in the 'unit_identifier_types' table)
+var identifier = "4102"; // THIS SHOULD BE YOUR IDENTIFIER (stored in the 'unit_identifiers' table)
 
 //
 // Setup HTTP client
@@ -16,7 +32,7 @@ var identifier = "4102"; // THIS SHOULD BE YOUR IDENTIFIER
 
 using var client = new HttpClient();
 
-client.BaseAddress = new Uri("https://atsusnb191.ats-global.local:8500");
+client.BaseAddress = new Uri(dataServiceEndpoint);
 
 try
 {
@@ -24,9 +40,9 @@ try
    // Get access token
    //
 
-   const string pat = "M2ZlOGY0MTAtMDYwYS00MGZiLTdiODItMDhkY2E1YWY1YmQy";
+   
 
-   var url = $"/api/internal/authentication/pat/{pat}";
+   var url = $"/api/internal/authentication/pat/{personalAccessToken}";
 
    using var tokenResponse = await client.GetAsync(url);
 
@@ -108,7 +124,7 @@ try
             PrinterName = properties.TravelServiceDefaultPrinter.Value,
             Qty = 1,
             StationId = stationContent.Id,
-            TicketTypeId = Convert.ToInt32(properties.TravelTicketType.Value),
+            TicketTypeId = Convert.ToInt32(properties.TravelServiceTicketTypeId.Value),
             UnitId = unitContent.UnitId,
             Username = "inspect",
             LanguageId = 1033 // U.S. English
@@ -169,8 +185,8 @@ public class Properties
    public PropertyValue TravelServiceId { get; set; }
    public PropertyValue TravelServiceDefaultPrinter { get; set; }
    public PropertyValue TravelServiceChecklistMode { get; set; }
+   public PropertyValue TravelServiceTicketTypeId { get; set; }
    public PropertyValue TrackingPointId { get; set; }
-   public PropertyValue TravelTicketType { get; set; }
 }
 
 public class PropertyValue
