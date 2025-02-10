@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+   <PropertyGroup Label="Globals">
+      <Configurations>Debug;Release</Configurations>
+   </PropertyGroup>
+   <PropertyGroup>
+      <RootNamespace>ATS.Inspect.Demo</RootNamespace>
+      <OutputType>Library</OutputType>
+      <Nullable>enable</Nullable>
+      <UseWindowsForms>true</UseWindowsForms>
+      <ImplicitUsings>enable</ImplicitUsings>
+      <TargetFramework>net8.0-windows</TargetFramework>
+      <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+      <Platforms>x64</Platforms>
+      <LangVersion>latest</LangVersion>
+   </PropertyGroup>
+</Project>
+

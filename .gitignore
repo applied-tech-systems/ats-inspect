@@ -9,3 +9,8 @@
 /DemoWebhookClient/.vs
 /DemoWebhookClient/obj/x64/Debug/net9.0/win-x64
 /DemoWebhookClient/obj
+/DemoCustomControl/.vs/DemoCustomControl
+/.vs
+/DemoCustomControl/obj
+/DemoCustomControl/ATS.Inspect.Demo.csproj.user
+/DemoCustomControl/.vs/ProjectEvaluation
