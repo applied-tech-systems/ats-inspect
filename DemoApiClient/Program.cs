@@ -4,6 +4,10 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
+// ReSharper disable UnusedAutoPropertyAccessor.Local
+// ReSharper disable UnusedMember.Local
+// ReSharper disable ClassNeverInstantiated.Local
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
 //
@@ -16,7 +20,9 @@ const string dataServiceEndpoint = "https://atsusnb191.ats-global.local:8500";  
 // Security info
 //
 
-const string personalAccessToken = "M2ZlOGY0MTAtMDYwYS00MGZiLTdiODItMDhkY2E1YWY1YmQy"; // You need to have a user set up in Security Manager, assign rights, and create a personal access token (PAT)
+// You need to have a user set up in Security Manager, assign rights, and create a personal access token (PAT). For
+// more info, see here: https://ats-help.com/security-configuration/#t=ATS_Configuration%2FSystem_Configuration%2FPersonal_Access_Tokens.htm&rhsearch=access%20token&rhhlterm=access%20tokens%20token
+const string personalAccessToken = "M2ZlOGY0MTAtMDYwYS00MGZiLTdiODItMDhkY2E1YWY1YmQy";
 
 //
 // API arguments
@@ -39,8 +45,6 @@ try
    //
    // Get access token
    //
-
-   
 
    var url = $"/api/internal/authentication/pat/{personalAccessToken}";
 
@@ -111,12 +115,12 @@ try
    // Print travel ticket?
    //
 
-   if (defectContent.NumOpenDefects > 0)
+   if (defectContent?.NumOpenDefects > 0)
    {
       url = $"/api/v1/collector/travel-service/print-ticket";
 
       // Shorthand
-      var properties = stationContent.Properties;
+      var properties = stationContent!.Properties;
 
       var request = new PrintTicketRequest
          {
@@ -151,7 +155,7 @@ catch (Exception ex)
 
 #region Station
 
-internal record CollectorResponse
+file record CollectorResponse
 {
    #region Properties
 
@@ -180,7 +184,7 @@ internal record CollectorResponse
    #endregion
 }
 
-public class Properties
+file record Properties
 {
    public PropertyValue TravelServiceId { get; set; }
    public PropertyValue TravelServiceDefaultPrinter { get; set; }
@@ -189,7 +193,7 @@ public class Properties
    public PropertyValue TrackingPointId { get; set; }
 }
 
-public class PropertyValue
+file record PropertyValue
 {
    [JsonPropertyName("id")]
    public string Id { get; set; }
@@ -201,7 +205,7 @@ public class PropertyValue
 
 #endregion
 
-public record PrintTicketRequest
+file record PrintTicketRequest
 {
    [JsonPropertyName("travelPrintServiceId")]
    public int TravelPrintServiceId { get; set; }
@@ -223,7 +227,7 @@ public record PrintTicketRequest
    public int LanguageId { get; set; }
 }
 
-public record DefectStatisticsResponse
+file record DefectStatisticsResponse
 {
    [JsonPropertyName("numDefects")]
    public int NumDefects { get; set; }
@@ -235,35 +239,7 @@ public record DefectStatisticsResponse
    public int NumConfirmedDefects { get; set; }
 }
 
-public record IdResponse
-{
-   #region Constructors
-
-   public IdResponse(int id = default)
-   {
-      Id = id;
-   }
-
-   public IdResponse()
-   {
-      // Empty on purpose
-   }
-
-   #endregion
-
-   #region Properties
-
-   #region Public Properties
-
-   [JsonPropertyName("id")]
-   public int Id { get; set; }
-
-   #endregion
-
-   #endregion
-}
-
-public record UnitIdResponse
+file record UnitIdResponse
 {
    #region Constructors
 
