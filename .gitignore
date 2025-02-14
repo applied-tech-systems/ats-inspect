@@ -14,3 +14,5 @@
 /DemoCustomControl/obj
 /DemoCustomControl/ATS.Inspect.Demo.csproj.user
 /DemoCustomControl/.vs/ProjectEvaluation
+*.bak
+/DemoApiClient/.vs/ProjectEvaluation
