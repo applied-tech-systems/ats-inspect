@@ -16,3 +16,4 @@
 /DemoCustomControl/.vs/ProjectEvaluation
 *.bak
 /DemoApiClient/.vs/ProjectEvaluation
+/DemoWebhookClient/bin/x64/Debug/net9.0/win-x64
