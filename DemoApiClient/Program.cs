@@ -1,3 +1,4 @@
+using System.Net;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
@@ -14,7 +15,7 @@ using System.Text.Json.Serialization;
 // Data Service endpoint
 //
 
-const string dataServiceEndpoint = "https://atsusnb191.ats-global.local:8500";   // Adjust this value to match your local environment
+const string dataServiceEndpoint = "https://atsusnb191.ats-global.local:8500"; // Adjust this value to match your local environment
 
 //
 // Security info
@@ -22,7 +23,7 @@ const string dataServiceEndpoint = "https://atsusnb191.ats-global.local:8500";  
 
 // You need to have a user set up in Security Manager, assign rights, and create a personal access token (PAT). For
 // more info, see here: https://ats-help.com/security-configuration/#t=ATS_Configuration%2FSystem_Configuration%2FPersonal_Access_Tokens.htm&rhsearch=access%20token&rhhlterm=access%20tokens%20token
-const string personalAccessToken = "M2ZlOGY0MTAtMDYwYS00MGZiLTdiODItMDhkY2E1YWY1YmQy";
+const string personalAccessToken = "NTE4ZWM3NTgtMzY5Yy00MzgwLTBhMDctMDhkZTA1MzcwYTdh";
 
 //
 // API arguments
@@ -38,7 +39,10 @@ var identifier = "4102"; // THIS SHOULD BE YOUR IDENTIFIER (stored in the 'unit_
 
 using var client = new HttpClient();
 
+client.Timeout = TimeSpan.FromSeconds(30);
 client.BaseAddress = new Uri(dataServiceEndpoint);
+client.DefaultRequestVersion = HttpVersion.Version30;
+client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionOrLower;
 
 try
 {
@@ -117,7 +121,7 @@ try
 
    if (defectContent?.NumOpenDefects > 0)
    {
-      url = $"/api/v1/collector/travel-service/print-ticket";
+      url = "/api/v1/collector/travel-service/print-ticket";
 
       // Shorthand
       var properties = stationContent!.Properties;
@@ -162,22 +166,22 @@ file record CollectorResponse
    #region Public Properties
 
    [JsonPropertyName("id")]
-   public int Id { get; set; }
+   public int Id { get; init; }
 
    [JsonPropertyName("code")]
-   public string Code { get; set; }
-   
+   public string Code { get; init; }
+
    [JsonPropertyName("description")]
-   public string Description { get; set; }
-   
+   public string Description { get; init; }
+
    [JsonPropertyName("properties")]
-   public Properties Properties { get; set; }
-   
+   public Properties Properties { get; init; }
+
    [JsonPropertyName("isActive")]
-   public bool IsActive { get; set; }
-   
+   public bool IsActive { get; init; }
+
    [JsonPropertyName("setupId")]
-   public int SetupId { get; set; }
+   public int SetupId { get; init; }
 
    #endregion
 
@@ -186,57 +190,106 @@ file record CollectorResponse
 
 file record Properties
 {
+   #region Properties
+
+   #region Public Properties
+
    public PropertyValue TravelServiceId { get; set; }
+
    public PropertyValue TravelServiceDefaultPrinter { get; set; }
+
    public PropertyValue TravelServiceChecklistMode { get; set; }
+
    public PropertyValue TravelServiceTicketTypeId { get; set; }
+
    public PropertyValue TrackingPointId { get; set; }
+
+   #endregion
+
+   #endregion
 }
 
 file record PropertyValue
 {
+   #region Properties
+
+   #region Public Properties
+
    [JsonPropertyName("id")]
    public string Id { get; set; }
+
    [JsonPropertyName("type")]
    public string Type { get; set; }
+
    [JsonPropertyName("value")]
    public string Value { get; set; }
+
+   #endregion
+
+   #endregion
 }
 
 #endregion
 
 file record PrintTicketRequest
 {
+   #region Properties
+
+   #region Public Properties
+
    [JsonPropertyName("travelPrintServiceId")]
    public int TravelPrintServiceId { get; set; }
+
    [JsonPropertyName("printerName")]
    public string PrinterName { get; set; }
+
    [JsonPropertyName("printGroupId")]
    public object PrintGroupId { get; set; }
+
    [JsonPropertyName("qty")]
    public int Qty { get; set; }
+
    [JsonPropertyName("stationId")]
    public int StationId { get; set; }
+
    [JsonPropertyName("ticketTypeId")]
    public int TicketTypeId { get; set; }
+
    [JsonPropertyName("unitId")]
    public int UnitId { get; set; }
+
    [JsonPropertyName("username")]
    public string Username { get; set; }
+
    [JsonPropertyName("languageId")]
    public int LanguageId { get; set; }
+
+   #endregion
+
+   #endregion
 }
 
 file record DefectStatisticsResponse
 {
+   #region Properties
+
+   #region Public Properties
+
    [JsonPropertyName("numDefects")]
-   public int NumDefects { get; set; }
+   public int NumDefects { get; init; }
+
    [JsonPropertyName("numOpenDefects")]
-   public int NumOpenDefects { get; set; }
+   public int NumOpenDefects { get; init; }
+
    [JsonPropertyName("numRepairedDefects")]
-   public int NumRepairDefects { get; set; }
+   public int NumRepairDefects { get; init; }
+
    [JsonPropertyName("numConfirmedDefects")]
-   public int NumConfirmedDefects { get; set; }
+   public int NumConfirmedDefects { get; init; }
+
+   #endregion
+
+   #endregion
 }
 
 file record UnitIdResponse
@@ -260,7 +313,7 @@ file record UnitIdResponse
    #region Public Properties
 
    [JsonPropertyName("unitId")]
-   public int UnitId { get; set; }
+   public int UnitId { get; init; }
 
    #endregion
 

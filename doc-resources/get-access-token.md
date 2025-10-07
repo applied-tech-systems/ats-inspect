@@ -22,6 +22,7 @@ If your information is correct, you should get a "200" response and see content 
 You then need to copy the data for the "access_token". In the example displayed, this means you need to copy everything inside the quotation marks to the right of the "access_token" tag:
 ![](swagger-ui-bearer-token-copy.png)
 Then go to the top of the Swagger page and click on the "Authorize" button:
+
 ![](swagger-ui-auth-button.png)  
 
 Then simply paste in the contents of the copied access token and click "Authorize".
