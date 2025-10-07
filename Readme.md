@@ -32,7 +32,7 @@ If performs the following API calls:
 Demonstrates consuming webhook messages from Data Service.
 To exercise this client, you will need to register a webhook. The easiest way to do this is to use the built-in Swagger interface for Data Service.
 To register a webhook, you will need to:
-* Start the webhook client (DemoWebhookClient)
+* Start the demo webhook client
 * [Get a bearer token](doc-resources/get-access-token.md)
 * Register a webhook
 
@@ -40,4 +40,4 @@ When you register the webhook, you will start to receive webhook messages of the
 
 
 ### DemoCustomControl
-Demonstrates creating a WinForms UserControl that can be registered via Form Composer and consumed within Data Collect. This allows extending the functionality of Data Collect in a clean and powerful way.
+Demonstrates creating a WinForms UserControl that can be registered via Form Composer and consumed within Data Collect. This allows extending the functionality of Data Collect in a clean and powerful way. Information on making a user control available in Data Collect can be found here: [ATS Inspect Help](https://ats-help.com/inspect/#t=Form_Composer%2FForm%20and%20Control%20Management.htm).
